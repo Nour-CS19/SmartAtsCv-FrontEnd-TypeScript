@@ -1,92 +1,28 @@
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { FileText, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border/50">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <FileText className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-foreground">CV Builder Pro</span>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">
-              المميزات
-            </a>
-            <a href="#templates" className="text-muted-foreground hover:text-primary transition-colors">
-              القوالب
-            </a>
-            <a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">
-              الأسعار
-            </a>
-            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-              من نحن
-            </a>
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" className="text-primary border-primary hover:bg-primary hover:text-white">
-              تسجيل الدخول
-            </Button>
-            <Button 
-              className="bg-gradient-primary text-white shadow-soft hover:shadow-medium transition-all"
-              onClick={() => window.location.href = '/cv-builder'}
-            >
-              ابدأ مجاناً
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
-            ) : (
-              <Menu className="w-6 h-6 text-foreground" />
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border/50">
-            <nav className="flex flex-col space-y-4">
-              <a href="#features" className="text-muted-foreground hover:text-primary transition-colors py-2">
-                المميزات
-              </a>
-              <a href="#templates" className="text-muted-foreground hover:text-primary transition-colors py-2">
-                القوالب
-              </a>
-              <a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors py-2">
-                الأسعار
-              </a>
-              <a href="#about" className="text-muted-foreground hover:text-primary transition-colors py-2">
-                من نحن
-              </a>
-              <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" className="text-primary border-primary">
-                  تسجيل الدخول
-                </Button>
-                <Button className="bg-gradient-primary text-white">
-                  ابدأ مجاناً
-                </Button>
-              </div>
-            </nav>
-          </div>
-        )}
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/80 text-white backdrop-blur-xl">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
+        <Link to="/" className="flex items-center gap-3" onClick={closeMenu}>
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-primary shadow-lg shadow-primary/25"><FileText className="h-5 w-5" /></span>
+          <span className="text-lg font-bold tracking-tight">CV Builder Pro</span>
+        </Link>
+        <nav className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+          <a href="#features" className="transition hover:text-white">Features</a>
+          <a href="#workflow" className="transition hover:text-white">How it works</a>
+          <a href="#about" className="transition hover:text-white">Why us</a>
+        </nav>
+        <Link to="/cv-builder" className="hidden md:block"><Button className="rounded-xl bg-white text-slate-950 hover:bg-slate-100">Build my CV</Button></Link>
+        <button className="rounded-lg p-2 md:hidden" aria-label="Toggle menu" onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}</button>
       </div>
+      {isMenuOpen && <div className="border-t border-white/10 bg-slate-950 px-4 py-5 md:hidden"><nav className="container mx-auto flex flex-col gap-4 text-slate-200"><a href="#features" onClick={closeMenu}>Features</a><a href="#workflow" onClick={closeMenu}>How it works</a><a href="#about" onClick={closeMenu}>Why us</a><Link to="/cv-builder" onClick={closeMenu}><Button className="mt-2 w-full rounded-xl bg-gradient-primary text-white">Build my CV</Button></Link></nav></div>}
     </header>
   );
 };
