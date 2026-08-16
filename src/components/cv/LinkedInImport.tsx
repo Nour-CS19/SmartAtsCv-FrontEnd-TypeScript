@@ -11,7 +11,7 @@ import {
   Download, 
   ExternalLink, 
   Info, 
-  Linkedin, 
+  Globe, 
   Loader2, 
   CheckCircle, 
   AlertTriangle 
@@ -121,7 +121,7 @@ const LinkedInImport = ({ onDataUpdate }: LinkedInImportProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
-              <Linkedin className="w-5 h-5 text-blue-600" />
+              <Globe className="w-5 h-5 text-blue-600" />
             </div>
             استيراد من LinkedIn
           </CardTitle>
